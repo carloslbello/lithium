@@ -1,0 +1,25 @@
+<script>
+    for(var i = 1; i < 4; i++) {
+        var canvas = document.createElement("canvas"),
+            context = canvas.getContext("2d"),
+            width = 29 * i,
+            rad = width / 5;
+        canvas.width = width;
+        canvas.height = width;
+        context.fillStyle = "#FFCC01";
+        context.arc(rad, rad, rad, Math.PI, Math.PI * 1.5);
+        context.arc(width - rad, rad, rad, Math.PI * 1.5, 0);
+        context.arc(width - rad, width - rad, rad, 0, Math.PI / 2);
+        context.arc(rad, width - rad, rad, Math.PI / 2, Math.PI);
+        context.closePath();
+        context.fill();
+        context.fillStyle = "#000";
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.font = width * 3 / 5 + "px -apple-system";
+        context.fillText("Li", width * 4.25 / 10, width / 2);
+        context.font = width / 4 + "px -apple-system";
+        context.fillText("2", width * 7.5 / 10, width * 7 / 10);
+        document.write("<img src=\"" + canvas.toDataURL("image/png") + "\" />");
+    }
+</script>

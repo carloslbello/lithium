@@ -3,6 +3,6 @@
 
 @interface UIImage (RenderBatteryImage)
 
-+ (UIImage *) renderBatteryImageForJavaScript:(NSString *)javascript height:(CGFloat)height percentage:(int)percentage charging:(int)charging color:(UIColor *)color;
++ (UIImage *) renderBatteryImageForJavaScript:(NSString *)javascript height:(CGFloat)height percentage:(int)percentage charging:(BOOL)charging lpm:(BOOL)lpm color:(UIColor *)color;
 
 @end

@@ -1,4 +1,4 @@
-function renderBattery(height, percentage, charging, low, color) {
+function renderBattery(height, percentage, charging, low, lpm, color) {
     var emptyBarCanvas = document.createElement("canvas"),
         emptyBarContext = emptyBarCanvas.getContext("2d"),
         emptyBarData,
@@ -35,6 +35,7 @@ function renderBattery(height, percentage, charging, low, color) {
     emptyBarData = emptyBarContext.getImageData(0, 0, barWidth, barHeight);
     fullBarContext.fillStyle = colorString;
     if(low) fullBarContext.fillStyle = "#FF3B30";
+    if(lpm) fullBarContext.fillStyle = "#FFCC01";
     if(charging) fullBarContext.fillStyle = "#4CD964";
     drawPath(fullBarContext);
     fullBarContext.fill();

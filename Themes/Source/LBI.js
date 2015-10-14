@@ -1,4 +1,4 @@
-function renderBattery(height, percentage, charging, low, color) {
+function renderBattery(height, percentage, charging, low, lpm, color) {
     var radius = Math.round(height * 4 / 5) / 2,
         lineWidth = Math.floor(height / 20),
         size = radius * 2 + lineWidth,
@@ -14,11 +14,13 @@ function renderBattery(height, percentage, charging, low, color) {
     context.lineWidth = lineWidth;
     context.strokeStyle = "rgba(" + colorString + ",0.3)";
     if(low) context.strokeStyle = "rgba(255,59,48,0.3)";
+    if(lpm) context.strokeStyle = "rgba(255,204,1,0.3)";
     if(charging) context.strokeStyle = "rgba(76,217,100,0.3)";
     context.arc(halfSize, halfSize, radius, 0, pi * 2);
     context.stroke();
     context.strokeStyle = "rgb(" + colorString + ")";
     if(low) context.strokeStyle = "#FF3B30";
+    if(lpm) context.strokeStyle = "#FFCC01";
     if(charging) context.strokeStyle = "#4CD964";
     context.fillStyle = context.strokeStyle;
     context.beginPath();

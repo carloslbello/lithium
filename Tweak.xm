@@ -42,7 +42,7 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 		int level = MSHookIvar<int>(self, "_capacity");
 		int state = MSHookIvar<int>(self, "_state");
 		CGFloat height = MSHookIvar<CGFloat>([self foregroundStyle], "_height") * [UIScreen mainScreen].scale;
-		UIImage *image = [UIImage renderBatteryImageForJavaScript:[LTMPrefsManager sharedManager].script height:height percentage:level charging:state color:[[self foregroundStyle] textColorForStyle:[self legibilityStyle]]];
+		UIImage *image = [UIImage renderBatteryImageForJavaScript:[LTMPrefsManager sharedManager].script height:height percentage:level charging:state lpm:[[NSProcessInfo processInfo] isLowPowerModeEnabled] color:[[self foregroundStyle] textColorForStyle:[self legibilityStyle]]];
 		return [%c(_UILegibilityImageSet) imageFromImage:image withShadowImage:image];
 	}
 	else {
