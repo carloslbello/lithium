@@ -6,19 +6,13 @@
 - (void)setObject:(id)value forKey:(NSString *)key inDomain:(NSString *)domain;
 @end
 
+
+
 static void notificationCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
-	if(![LTMPrefsManager sharedManager].batteryView) return;
 	NSNumber *n = (NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"lithiumEnabled" inDomain:@"lithium"];
 	if(n) [LTMPrefsManager sharedManager].enabled = [n boolValue];
 	NSString *theme = [[NSUserDefaults standardUserDefaults] objectForKey:@"lithiumTheme" inDomain:@"lithium"];
-	if(theme) [LTMPrefsManager sharedManager].theme = (NSMutableString*)theme;/*
-	SCD_Struct_UI69 *originalRawData = [[LTMPrefsManager sharedManager].data rawData];
-	SCD_Struct_UI69 *newRawData = originalRawData;
-	newRawData->batteryState = originalRawData->batteryState == 0 ? 1 : 0;
-	UIStatusBarComposedData *composedData = [[%c(UIStatusBarComposedData) alloc] initWithRawData:newRawData];
-	UIStatusBarComposedData *originalData = [LTMPrefsManager sharedManager].data;
-	[[LTMPrefsManager sharedManager].batteryView updateForNewData:composedData actions:0];
-	[[LTMPrefsManager sharedManager].batteryView updateForNewData:originalData actions:0];*/
+	if(theme) [LTMPrefsManager sharedManager].theme = (NSMutableString*)theme;
 }
 
 %ctor {
@@ -26,12 +20,6 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 }
 
 %hook UIStatusBarBatteryItemView
-
-- (BOOL)updateForNewData:(UIStatusBarComposedData*)data actions:(int)actions {
-	[LTMPrefsManager sharedManager].batteryView = self;
-	[LTMPrefsManager sharedManager].data = data;
-	return %orig;
-}
 
 - (BOOL)_needsAccessoryImage {
 	return ([LTMPrefsManager sharedManager].enabled) ? NO : %orig;
@@ -42,7 +30,11 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 		int level = MSHookIvar<int>(self, "_capacity");
 		int state = MSHookIvar<int>(self, "_state");
 		CGFloat height = MSHookIvar<CGFloat>([self foregroundStyle], "_height") * [UIScreen mainScreen].scale;
-		UIImage *image = [UIImage renderBatteryImageForJavaScript:[LTMPrefsManager sharedManager].script height:height percentage:level charging:state lpm:[[NSProcessInfo processInfo] isLowPowerModeEnabled] color:[[self foregroundStyle] textColorForStyle:[self legibilityStyle]]];
+		BOOL lpm = false;
+		if ([[[UIDevice currentDevice] systemVersion] compare:@"9.0" options:NSNumericSearch] != NSOrderedAscending) {
+			lpm = [[NSProcessInfo processInfo] isLowPowerModeEnabled];
+		}
+		UIImage *image = [UIImage renderBatteryImageForJavaScript:[LTMPrefsManager sharedManager].script height:height percentage:level charging:state lpm:lpm color:[[self foregroundStyle] textColorForStyle:[self legibilityStyle]]];
 		return [%c(_UILegibilityImageSet) imageFromImage:image withShadowImage:image];
 	}
 	else {

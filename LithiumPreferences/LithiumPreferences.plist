@@ -19,11 +19,11 @@
 			<string>Enabled</string>
 		</dict>
 		<dict>
-			<key>cell</key> 			 
+			<key>cell</key>
 			<string>PSLinkListCell</string>
-			<key>detail</key> 			 
+			<key>detail</key>
 			<string>LTMListItemsController</string>
-			<key>key</key> 				 
+			<key>key</key>
 			<string>lithiumTheme</string>
 			<key>default</key>
 			<string>Habesha</string>
@@ -33,14 +33,8 @@
 			<string>Theme</string>
 			<key>titlesDataSource</key>
 			<string>themeTitles:</string>
-			<key>valuesDataSource</key> 
+			<key>valuesDataSource</key>
 			<string>themeValues:</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>footerText</key>
-			<string>After updating preferences, changes may take a few minutes to take effect. You can optionally respring to force them to happen immediately.</string>
 		</dict>
 	</array>
 	<key>title</key>

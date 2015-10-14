@@ -65,6 +65,7 @@ static CGFloat largestWidth;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[super tableView:tableView didSelectRowAtIndexPath:indexPath];
 	CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFSTR("lithium.prefs-changed"), nil, nil, NO);
+	// CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (__bridge CFStringRef)UIDeviceBatteryStateDidChangeNotification, nil, nil, NO);
 }
 
 @end
