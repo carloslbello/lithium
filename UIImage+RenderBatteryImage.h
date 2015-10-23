@@ -1,8 +1,8 @@
-#include <UIKit/UIKit.h>
 #include <CoreGraphics/CoreGraphics.h>
+#include <objcipc/objcipc.h>
 
 @interface UIImage (RenderBatteryImage)
 
-+ (UIImage *) renderBatteryImageForJavaScript:(NSString *)javascript height:(CGFloat)height percentage:(int)percentage charging:(BOOL)charging lpm:(BOOL)lpm color:(UIColor *)color;
++ (UIImage *) renderBatteryImageForTheme:(NSString *)theme height:(int)height percentage:(int)percentage charging:(BOOL)charging lpm:(BOOL)lpm color:(UIColor *)color;
 
 @end

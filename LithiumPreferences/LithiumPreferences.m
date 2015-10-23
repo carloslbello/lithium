@@ -21,10 +21,12 @@ static CGFloat largestWidth;
 	NSArray *contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:@"/Library/Lithium/" error:nil];
 	for(NSString *file in contents) {
 		if([file hasSuffix:@".js"]) {
-			[themes addObject:[file substringToIndex:(file.length - 3)]];
-			UIImage *image = [UIImage renderBatteryImageForJavaScript:[NSString stringWithContentsOfFile:[NSString stringWithFormat:@"/var/mobile/Lithium/%@", file] encoding:NSUTF8StringEncoding error:nil] height:20*[UIScreen mainScreen].scale percentage:66 charging:0 lpm:NO color:[UIColor blackColor]];
-			[images setObject:image forKey:[file substringToIndex:(file.length - 3)]];
+			NSString *theme = [[NSString alloc] initWithString:[file substringToIndex:(file.length - 3)]];
+			[themes addObject:theme];
+			UIImage *image = [UIImage renderBatteryImageForTheme:theme height:20*[UIScreen mainScreen].scale percentage:66 charging:0 lpm:NO color:[UIColor blackColor]];
+			[images setObject:image forKey:theme];
 			largestWidth = fmax(largestWidth, image.size.width);
+			[theme release];
 		}
 	}
 	listController = self;

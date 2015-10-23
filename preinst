@@ -1,5 +1,0 @@
-#!/bin/bash
-if [ $1 == "install" ]; then
-	mkdir /Library/Lithium
-	ln -s /Library/Lithium /var/mobile/Lithium
-fi

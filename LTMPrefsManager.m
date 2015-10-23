@@ -2,7 +2,7 @@
 
 @implementation LTMPrefsManager
 
-@synthesize enabled = _enabled, script = _script, theme = _theme;
+@synthesize enabled = _enabled, theme = _theme;
 static LTMPrefsManager *sharedManager;
 
 + (instancetype)sharedManager {
@@ -21,19 +21,7 @@ static LTMPrefsManager *sharedManager;
 	return self;
 }
 
-- (void)setTheme:(NSMutableString*)theme {
-	_theme = theme;
-	if(_enabled) {
-		NSFileManager *fileManager = [NSFileManager defaultManager];
-		NSString *fileLocation = [[NSString alloc] initWithFormat:@"/var/mobile/Lithium/%@.js", _theme];
-		if(![fileManager fileExistsAtPath:fileLocation]) _enabled = NO;
-		else _script = [[NSMutableString alloc] initWithContentsOfFile:fileLocation encoding:NSUTF8StringEncoding error:nil];
-		[fileLocation release];
-	}
-}
-
 - (void)dealloc {
-	[_script release];
 	[_theme release];
 	[super dealloc];
 }

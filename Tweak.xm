@@ -34,7 +34,8 @@ static void notificationCallback(CFNotificationCenterRef center, void *observer,
 		if ([[[UIDevice currentDevice] systemVersion] compare:@"9.0" options:NSNumericSearch] != NSOrderedAscending) {
 			lpm = [[NSProcessInfo processInfo] isLowPowerModeEnabled];
 		}
-		UIImage *image = [UIImage renderBatteryImageForJavaScript:[LTMPrefsManager sharedManager].script height:height percentage:level charging:state lpm:lpm color:[[self foregroundStyle] textColorForStyle:[self legibilityStyle]]];
+		NSLog(@"LITHIUM: asking for render")
+		UIImage *image = [UIImage renderBatteryImageForTheme:[LTMPrefsManager sharedManager].theme height:height percentage:level charging:state lpm:lpm color:[[self foregroundStyle] textColorForStyle:[self legibilityStyle]]];
 		return [%c(_UILegibilityImageSet) imageFromImage:image withShadowImage:image];
 	}
 	else {

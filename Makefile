@@ -6,9 +6,11 @@ include theos/makefiles/common.mk
 TWEAK_NAME = Lithium
 Lithium_FILES = Tweak.xm
 Lithium_FRAMEWORKS = UIKit CoreGraphics
+Lithium_LIBRARIES += objcipc
+Lithium_LDFLAGS += -Wl,-segalign,4000
 
 include $(THEOS_MAKE_PATH)/tweak.mk
-SUBPROJECTS += LithiumPreferences
+SUBPROJECTS += LithiumPreferences LithiumServer
 include $(THEOS_MAKE_PATH)/aggregate.mk
 
 before-stage::
@@ -16,5 +18,3 @@ before-stage::
 internal-stage::
 	$(ECHO_NOTHING)mkdir -p $(THEOS_STAGING_DIR)/Library/Lithium$(ECHO_END)
 	$(ECHO_NOTHING)cp Themes/Compiled/*.js $(THEOS_STAGING_DIR)/Library/Lithium$(ECHO_END)
-	$(ECHO_NOTHING)mkdir $(THEOS_STAGING_DIR)/DEBIAN$(ECHO_END)
-	$(ECHO_NOTHING)cp preinst postrm $(THEOS_STAGING_DIR)/DEBIAN$(ECHO_END)

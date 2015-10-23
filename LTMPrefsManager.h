@@ -27,7 +27,6 @@
 
 @interface LTMPrefsManager : NSObject
 
-@property(nonatomic, retain) NSMutableString *script;
 @property(nonatomic) BOOL enabled;
 @property(nonatomic, retain) NSMutableString *theme;
 

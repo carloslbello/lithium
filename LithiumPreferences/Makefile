@@ -8,6 +8,8 @@ LithiumPreferences_FILES = LithiumPreferences.m
 LithiumPreferences_INSTALL_PATH = /Library/PreferenceBundles
 LithiumPreferences_FRAMEWORKS = UIKit Foundation CoreGraphics
 LithiumPreferences_PRIVATE_FRAMEWORKS = Preferences
+LithiumPreferences_LIBRARIES += objcipc
+LithiumPreferences_LDFLAGS += -Wl,-segalign,4000
 
 include $(THEOS_MAKE_PATH)/bundle.mk
 
